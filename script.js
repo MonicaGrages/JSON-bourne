@@ -6,8 +6,13 @@ $(function () {
     $('#mission_status').html('In Progress');
     var ajax = $.get("https://api.myjson.com/bins/1680y")
     .done (function(data, textStatus, jqXHR) {
-      console.log(ajax.responseJSON.passphrase);
+      console.log(data.passphrase);
+      console.log(textStatus);
+        if (textStatus === "success") {
         $('#mission_status').html('Completed');
+      } else {
+        $('#mission_status').html('Failed');
+      }
     });
   });
 
@@ -21,9 +26,13 @@ $(function () {
           contentType:"application/json; charset=utf-8",
           dataType:"json",
           success: function(data, textStatus, jqXHR){
-            console.log(data);
-            console.log('successful post');
-            $('#mission_status').html('Completed');
+            console.log('posted to: '+data.uri);
+            console.log(textStatus);
+            if (textStatus === "success") {
+              $('#mission_status').html('Completed');
+            } else {
+              $('#mission_status').html('Failed');
+            }
           }
       });
   });
@@ -33,7 +42,12 @@ $(function () {
     ajax = $.get("https://api.myjson.com/bins/3te1c")
     .done (function(data, textStatus, jqXHR) {
       console.log(ajax.responseJSON.passphrase);
-      $('#mission_status').html('Completed');
+      console.log(textStatus);
+      if (textStatus === "success") {
+        $('#mission_status').html('Completed');
+      } else {
+        $('#mission_status').html('Failed');
+      }
     });
   });
 
